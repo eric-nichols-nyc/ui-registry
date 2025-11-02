@@ -1,0 +1,157 @@
+---
+title: Gallery
+description: A production-ready image gallery with auto-advance, navigation controls, progress bar, and smooth transitions
+---
+
+import { CarouselDemo } from '@/registry/new-york/examples/carousel-demo'
+
+## Preview
+
+<CarouselDemo />
+
+## Installation
+
+### CLI
+
+Using npm:
+
+```sh
+npx shadcn@latest add https://your-domain.com/r/carousel.json
+```
+
+Using pnpm:
+
+```sh
+pnpm dlx shadcn@latest add https://your-domain.com/r/carousel.json
+```
+
+### Manual
+
+#### Step 1: Install the following dependencies
+
+Using npm:
+
+```sh
+npm install clsx tailwind-merge lucide-react
+```
+
+Using pnpm:
+
+```sh
+pnpm add clsx tailwind-merge lucide-react
+```
+
+#### Step 2: Add a classname utility function
+
+Create or update your `lib/utils.ts` file:
+
+```tsx
+import { clsx, type ClassValue } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+
+export const cn = (...inputs: ClassValue[]) => {
+  return twMerge(clsx(inputs));
+};
+```
+
+#### Step 3: Ensure dependencies are installed
+
+Make sure you have the required shadcn/ui components installed:
+
+- `button`
+- `card`
+- `progress`
+
+You can install them using:
+
+```sh
+npx shadcn@latest add button card progress
+```
+
+#### Step 4: Copy the component code
+
+Copy the carousel component from `registry/new-york/blocks/carousel/carousel.tsx` to your project and update the import paths to match your project setup.
+
+## Usage
+
+```tsx
+import {
+  Carousel,
+  CarouselItem,
+  CarouselNavigation,
+  CarouselIndicators,
+  CarouselCounter
+} from "@/registry/new-york/blocks/carousel/carousel"
+
+export function MyCarousel() {
+  return (
+    <Carousel
+      showProgress={true}
+      autoPlay={true}
+      autoPlayInterval={5000}
+      transition="fade"
+    >
+      <CarouselItem>
+        <div className="aspect-video bg-muted rounded-lg">
+          {/* Your content here */}
+        </div>
+        <CarouselNavigation />
+        <CarouselCounter />
+      </CarouselItem>
+      <CarouselItem>
+        <div className="aspect-video bg-muted rounded-lg">
+          {/* Your content here */}
+        </div>
+        <CarouselNavigation />
+        <CarouselCounter />
+      </CarouselItem>
+      <CarouselIndicators />
+    </Carousel>
+  )
+}
+```
+
+## API Reference
+
+### Carousel Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `showProgress` | `boolean` | `true` | Show/hide progress bar |
+| `autoPlay` | `boolean` | `true` | Enable/disable auto-advance |
+| `autoPlayInterval` | `number` | `5000` | Time (ms) between auto-advances |
+| `transition` | `"fade" \| "slide"` | `"fade"` | Transition animation type |
+| `className` | `string` | `undefined` | Additional CSS classes |
+| `onIndexChange` | `(index: number) => void` | `undefined` | Callback when index changes |
+
+### CarouselItem Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | `undefined` | Additional CSS classes |
+
+### CarouselNavigation Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `position` | `"top" \| "middle" \| "bottom"` | `"middle"` | Position of navigation buttons |
+| `variant` | `ButtonVariant` | `"ghost"` | Button variant |
+| `showText` | `boolean` | `false` | Show text labels with icons |
+| `previousLabel` | `string` | `"Previous"` | Label for previous button |
+| `nextLabel` | `string` | `"Next"` | Label for next button |
+| `previousIcon` | `React.ReactNode` | `ChevronLeft` | Icon for previous button |
+| `nextIcon` | `React.ReactNode` | `ChevronRight` | Icon for next button |
+| `className` | `string` | `undefined` | Additional CSS classes |
+
+## Features
+
+- ✨ Auto-advance mode with configurable intervals
+- 🎯 Progress indicator showing current position
+- ⬅️➡️ Navigation buttons for manual control
+- 📊 Thumbnail indicators for quick navigation
+- ⌨️ Keyboard navigation (arrow keys)
+- 🎨 Transition modes (fade or slide)
+- 🖱️ Pause on hover when auto-advance is enabled
+- 📱 Responsive design for mobile and desktop
+- 🔄 Infinite looping through items
+
