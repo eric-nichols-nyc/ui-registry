@@ -5,19 +5,21 @@ import { Sparkles, Palette, Code, Zap } from 'lucide-react';
 
 export default function HomePage() {
   return (
-    <div className="flex flex-col items-center justify-center text-center flex-1 min-h-screen bg-linear-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-slate-950 dark:via-slate-900 dark:to-indigo-950 px-4">
-      <div className="max-w-4xl mx-auto space-y-8">
+    <div className="relative flex flex-col items-center justify-center text-center flex-1 min-h-screen bg-black px-4">
+      {/* Very subtle gradient at the top */}
+      <div className="absolute top-0 left-0 right-0 h-64 bg-linear-to-b from-indigo-950/20 via-blue-950/10 to-transparent pointer-events-none" />
+      <div className="relative max-w-4xl mx-auto space-y-8 z-10">
         {/* Icons and badges */}
         <div className="flex justify-center items-center gap-3 flex-wrap mb-6">
-          <Badge variant="secondary" className="px-4 py-2 text-sm">
+          <Badge variant="secondary" className="px-4 py-2 text-sm bg-slate-900 text-slate-300 border-slate-800">
             <Sparkles className="w-4 h-4 mr-2 inline" />
             Modern Components
           </Badge>
-          <Badge variant="secondary" className="px-4 py-2 text-sm">
+          <Badge variant="secondary" className="px-4 py-2 text-sm bg-slate-900 text-slate-300 border-slate-800">
             <Palette className="w-4 h-4 mr-2 inline" />
             Fully Customizable
           </Badge>
-          <Badge variant="secondary" className="px-4 py-2 text-sm">
+          <Badge variant="secondary" className="px-4 py-2 text-sm bg-slate-900 text-slate-300 border-slate-800">
             <Code className="w-4 h-4 mr-2 inline" />
             TypeScript Ready
           </Badge>
@@ -25,11 +27,11 @@ export default function HomePage() {
 
         {/* Main title */}
         <div className="space-y-4">
-          <h1 className="text-6xl md:text-7xl font-bold tracking-tight bg-linear-to-r from-slate-900 via-blue-900 to-indigo-900 dark:from-slate-100 dark:via-blue-100 dark:to-indigo-100 bg-clip-text text-transparent">
+          <h1 className="text-6xl md:text-7xl font-bold tracking-tight text-white">
             Welcome to my Custom UI library
           </h1>
-          <p className="text-xl md:text-2xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-            Beautiful, accessible components built with React and Tailwind CSS.
+          <p className="text-xl md:text-2xl text-slate-400 max-w-2xl mx-auto">
+            Beautiful, accessible components built with React, Tailwind CSS, and shadcn/ui.
             Start building amazing interfaces today.
           </p>
         </div>
@@ -49,25 +51,25 @@ export default function HomePage() {
         </div>
 
         {/* Feature highlights */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16 pt-8 border-t border-slate-200 dark:border-slate-800">
-          <div className="p-6 rounded-lg bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-shadow">
-            <Sparkles className="w-8 h-8 mx-auto mb-3 text-blue-600" />
-            <h3 className="font-semibold mb-2">Production Ready</h3>
-            <p className="text-sm text-slate-600 dark:text-slate-400">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16 pt-8 border-t border-slate-900">
+          <div className="p-6 rounded-lg bg-slate-950/50 backdrop-blur-sm border border-slate-900 hover:border-slate-800 hover:bg-slate-900/50 transition-all">
+            <Sparkles className="w-8 h-8 mx-auto mb-3 text-blue-500" />
+            <h3 className="font-semibold mb-2 text-white">Production Ready</h3>
+            <p className="text-sm text-slate-400">
               Battle-tested components used in real-world applications
             </p>
           </div>
-          <div className="p-6 rounded-lg bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-shadow">
-            <Palette className="w-8 h-8 mx-auto mb-3 text-indigo-600" />
-            <h3 className="font-semibold mb-2">Beautiful Design</h3>
-            <p className="text-sm text-slate-600 dark:text-slate-400">
+          <div className="p-6 rounded-lg bg-slate-950/50 backdrop-blur-sm border border-slate-900 hover:border-slate-800 hover:bg-slate-900/50 transition-all">
+            <Palette className="w-8 h-8 mx-auto mb-3 text-indigo-500" />
+            <h3 className="font-semibold mb-2 text-white">Beautiful Design</h3>
+            <p className="text-sm text-slate-400">
               Carefully crafted with attention to detail and aesthetics
             </p>
           </div>
-          <div className="p-6 rounded-lg bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-shadow">
-            <Code className="w-8 h-8 mx-auto mb-3 text-purple-600" />
-            <h3 className="font-semibold mb-2">Developer Friendly</h3>
-            <p className="text-sm text-slate-600 dark:text-slate-400">
+          <div className="p-6 rounded-lg bg-slate-950/50 backdrop-blur-sm border border-slate-900 hover:border-slate-800 hover:bg-slate-900/50 transition-all">
+            <Code className="w-8 h-8 mx-auto mb-3 text-purple-500" />
+            <h3 className="font-semibold mb-2 text-white">Developer Friendly</h3>
+            <p className="text-sm text-slate-400">
               Fully typed, composable, and easy to customize
             </p>
           </div>
