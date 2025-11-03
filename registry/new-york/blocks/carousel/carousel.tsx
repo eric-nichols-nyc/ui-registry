@@ -4,7 +4,6 @@ import * as React from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/registry/new-york/ui/button"
 import { Card } from "@/registry/new-york/ui/card"
-import { Progress } from "@/registry/new-york/ui/progress"
 import { cn } from "@/lib/utils"
 
 interface CarouselContextValue {
@@ -178,7 +177,7 @@ const CarouselRoot = ({
   const otherChildren = allChildren.filter((child) => {
     return React.isValidElement(child) && child.type !== CarouselItem
   })
-  
+
   const totalItems = items.length
   const isSingleItem = totalItems === 1
 
@@ -296,7 +295,7 @@ const CarouselRoot = ({
               const isActive = index === currentIndex
               const isComplete = index <= currentIndex
               const stepProgress = isComplete ? 100 : 0
-              
+
               return (
                 <div
                   key={index}

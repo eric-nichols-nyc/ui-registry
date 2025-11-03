@@ -1,0 +1,250 @@
+---
+title: Multi Select
+description: A flexible multi-select component with search, grouping, async support, and custom options
+---
+
+import { MultiSelectDemo } from '@/registry/new-york/examples/multi-select-demo'
+
+## Preview
+
+<MultiSelectDemo />
+
+## Installation
+
+### CLI
+
+Using npm:
+
+```sh
+npx shadcn@latest add https://your-domain.com/r/multi-select.json
+```
+
+Using pnpm:
+
+```sh
+pnpm dlx shadcn@latest add https://your-domain.com/r/multi-select.json
+```
+
+### Manual
+
+#### Step 1: Install the following dependencies
+
+Using npm:
+
+```sh
+npm install cmdk clsx tailwind-merge lucide-react
+```
+
+Using pnpm:
+
+```sh
+pnpm add cmdk clsx tailwind-merge lucide-react
+```
+
+#### Step 2: Add a classname utility function
+
+Create or update your `lib/utils.ts` file:
+
+```tsx
+import { clsx, type ClassValue } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+
+export const cn = (...inputs: ClassValue[]) => {
+  return twMerge(clsx(inputs));
+};
+```
+
+#### Step 3: Ensure dependencies are installed
+
+Make sure you have the required shadcn/ui components installed:
+
+- `badge`
+- `command`
+
+You can install them using:
+
+```sh
+npx shadcn@latest add badge command
+```
+
+#### Step 4: Copy the component code
+
+Copy the multi-select component from `registry/new-york/blocks/mulit-select/multi-select.tsx` to your project and update the import paths to match your project setup.
+
+## Usage
+
+### Basic Multi-Select
+
+```tsx
+import MultipleSelector, { Option } from "@/registry/new-york/blocks/mulit-select/multi-select"
+
+export function MyMultiSelect() {
+  const [selected, setSelected] = React.useState<Option[]>([])
+
+  const options: Option[] = [
+    { value: "react", label: "React" },
+    { value: "nextjs", label: "Next.js" },
+    { value: "typescript", label: "TypeScript" },
+  ]
+
+  return (
+    <MultipleSelector
+      value={selected}
+      onChange={setSelected}
+      options={options}
+      placeholder="Select options..."
+    />
+  )
+}
+```
+
+### With Max Selection Limit
+
+```tsx
+import MultipleSelector, { Option } from "@/registry/new-york/blocks/mulit-select/multi-select"
+
+export function LimitedMultiSelect() {
+  const [selected, setSelected] = React.useState<Option[]>([])
+
+  return (
+    <MultipleSelector
+      value={selected}
+      onChange={setSelected}
+      options={options}
+      placeholder="Select up to 3 items..."
+      maxSelected={3}
+      onMaxSelected={(maxLimit) => {
+        alert(`Maximum ${maxLimit} items can be selected`)
+      }}
+    />
+  )
+}
+```
+
+### Grouped Options
+
+```tsx
+import MultipleSelector, { Option } from "@/registry/new-york/blocks/mulit-select/multi-select"
+
+export function GroupedMultiSelect() {
+  const options: Option[] = [
+    { value: "apple", label: "Apple", category: "Fruits" },
+    { value: "banana", label: "Banana", category: "Fruits" },
+    { value: "carrot", label: "Carrot", category: "Vegetables" },
+  ]
+
+  return (
+    <MultipleSelector
+      options={options}
+      placeholder="Select items..."
+      groupBy="category"
+    />
+  )
+}
+```
+
+### Creatable Multi-Select
+
+```tsx
+import MultipleSelector from "@/registry/new-york/blocks/mulit-select/multi-select"
+
+export function CreatableMultiSelect() {
+  return (
+    <MultipleSelector
+      placeholder="Type to search or create..."
+      creatable
+    />
+  )
+}
+```
+
+### Async Search
+
+```tsx
+import MultipleSelector from "@/registry/new-york/blocks/mulit-select/multi-select"
+
+export function AsyncMultiSelect() {
+  const searchUsers = async (query: string) => {
+    // Simulate API call
+    const response = await fetch(`/api/users?q=${query}`)
+    const data = await response.json()
+    return data.map(user => ({ value: user.id, label: user.name }))
+  }
+
+  return (
+    <MultipleSelector
+      onSearch={searchUsers}
+      placeholder="Search users..."
+      triggerSearchOnFocus
+      delay={300}
+      loadingIndicator={<p>Loading...</p>}
+      emptyIndicator={<p>No users found.</p>}
+    />
+  )
+}
+```
+
+## API Reference
+
+### MultipleSelectorProps
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `Option[]` | `undefined` | Controlled value of selected options |
+| `defaultOptions` | `Option[]` | `[]` | Default options when not using controlled mode |
+| `options` | `Option[]` | `undefined` | Manually controlled options |
+| `placeholder` | `string` | `"Select options..."` | Placeholder text |
+| `loadingIndicator` | `React.ReactNode` | `undefined` | Loading component for async search |
+| `emptyIndicator` | `React.ReactNode` | `undefined` | Empty state component |
+| `delay` | `number` | `500` | Debounce time for async search (ms) |
+| `triggerSearchOnFocus` | `boolean` | `false` | Trigger search on focus |
+| `onSearch` | `(value: string) => Promise<Option[]>` | `undefined` | Async search function |
+| `onSearchSync` | `(value: string) => Option[]` | `undefined` | Sync search function |
+| `onChange` | `(options: Option[]) => void` | `undefined` | Callback when selection changes |
+| `maxSelected` | `number` | `Number.MAX_SAFE_INTEGER` | Maximum number of selections |
+| `onMaxSelected` | `(maxLimit: number) => void` | `undefined` | Callback when max limit is reached |
+| `hidePlaceholderWhenSelected` | `boolean` | `false` | Hide placeholder when items are selected |
+| `disabled` | `boolean` | `false` | Disable the component |
+| `groupBy` | `string` | `undefined` | Group options by this key |
+| `className` | `string` | `undefined` | Additional CSS classes |
+| `badgeClassName` | `string` | `undefined` | Additional CSS classes for badges |
+| `selectFirstItem` | `boolean` | `true` | Select first item by default |
+| `creatable` | `boolean` | `false` | Allow creating new options |
+| `commandProps` | `ComponentProps<typeof Command>` | `undefined` | Props to pass to Command component |
+| `inputProps` | `ComponentProps<CommandPrimitive.Input>` | `undefined` | Props to pass to input element |
+| `hideClearAllButton` | `boolean` | `false` | Hide the clear all button |
+
+### Option Interface
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `value` | `string` | Unique value for the option |
+| `label` | `string` | Display label for the option |
+| `disable` | `boolean` | Disable this specific option |
+| `fixed` | `boolean` | Make option unremovable |
+| `[key: string]` | `string \| boolean \| undefined` | Additional properties for grouping |
+
+### MultipleSelectorRef
+
+| Method | Type | Description |
+|--------|------|-------------|
+| `selectedValue` | `Option[]` | Currently selected options |
+| `input` | `HTMLInputElement` | Reference to input element |
+| `focus()` | `() => void` | Focus the input element |
+| `reset()` | `() => void` | Reset selections |
+
+## Features
+
+- 🔍 **Search & Filter** - Built-in search with keyboard navigation
+- ⚡ **Async Support** - Async search with loading states and debouncing
+- 🏷️ **Creatable** - Create new options on the fly
+- 📊 **Grouping** - Group options by categories
+- 🎯 **Limits** - Set maximum selection limits
+- 🔒 **Fixed Options** - Make certain options unremovable
+- 🚫 **Disabled Options** - Disable specific options
+- 🎨 **Customizable** - Full control over styling and behavior
+- ♿ **Accessible** - Keyboard navigation and ARIA support
+- 🔄 **Controlled & Uncontrolled** - Support both patterns
+- 💬 **Empty States** - Custom empty and loading indicators
+- ⌨️ **Keyboard Support** - Delete/Backspace to remove, Escape to blur
+

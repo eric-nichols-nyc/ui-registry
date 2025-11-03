@@ -32,6 +32,23 @@
                     "type": "registry:example"
                 }
             ]
+        },
+        {
+            "name": "multi-select",
+            "type": "registry:block",
+            "title": "Multi Select",
+            "description": "A flexible multi-select component with search, grouping, async support, and custom options",
+            "registryDependencies": ["badge", "command"],
+            "files": [
+                {
+                    "path": "registry/new-york/blocks/mulit-select/multi-select.tsx",
+                    "type": "registry:block"
+                },
+                {
+                    "path": "registry/new-york/examples/multi-select-demo.tsx",
+                    "type": "registry:example"
+                }
+            ]
         }
     ]
 }
